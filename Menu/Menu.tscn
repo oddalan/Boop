@@ -1,0 +1,187 @@
+[gd_scene format=3 uid="uid://d2frtx7nc7s0w"]
+
+[ext_resource type="Theme" uid="uid://huu2vw7u644u" path="res://UI/Themes/Theme.tres" id="1_jf1j2"]
+[ext_resource type="Script" uid="uid://cvtt45h0juo5s" path="res://Menu/Code/menu.gd" id="2_e56cd"]
+[ext_resource type="Script" uid="uid://bc83lhqj8vd1j" path="res://Menu/Code/settings.gd" id="3_crea4"]
+[ext_resource type="AudioStream" uid="uid://bct5yv2rn0hm6" path="res://Sound/Button.mp3" id="3_u03px"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8uvy0"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="UI" type="Control" unique_id=1179703440]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_jf1j2")
+script = ExtResource("2_e56cd")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1733899394]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.06053035, 0.06053035, 0.060530342, 1)
+
+[node name="Stack" type="TabContainer" parent="." unique_id=1584191469]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8uvy0")
+current_tab = 0
+tabs_visible = false
+
+[node name="Main Page" type="Control" parent="Stack" unique_id=537425170]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Contents" type="VBoxContainer" parent="Stack/Main Page" unique_id=1933433813]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = -64.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Stack/Main Page/Contents" unique_id=1535575452]
+custom_minimum_size = Vector2(1152, 112)
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Boop"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Center" type="CenterContainer" parent="Stack/Main Page/Contents" unique_id=1561222828]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Buttons" type="VBoxContainer" parent="Stack/Main Page/Contents/Button Center" unique_id=1282654815]
+custom_minimum_size = Vector2(256, 128)
+layout_mode = 2
+
+[node name="Play" type="Button" parent="Stack/Main Page/Contents/Button Center/Buttons" unique_id=948933741]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Play"
+
+[node name="Credits" type="Button" parent="Stack/Main Page/Contents/Button Center/Buttons" unique_id=1553720001]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Credits"
+
+[node name="Settings" type="Button" parent="Stack/Main Page/Contents/Button Center/Buttons" unique_id=2049666861]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Settings
+"
+
+[node name="Credits" type="Control" parent="Stack" unique_id=1272832792]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Back" type="Button" parent="Stack/Credits" unique_id=1921661344]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 84.0
+offset_bottom = 36.0
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 16
+text = "Back
+"
+
+[node name="CenterContainer" type="CenterContainer" parent="Stack/Credits" unique_id=415316428]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Stack/Credits/CenterContainer" unique_id=1821858921]
+layout_mode = 2
+text = "Game: Oddalan
+Fonts: Fontspace"
+horizontal_alignment = 1
+
+[node name="Settings" type="Control" parent="Stack" unique_id=1609071277]
+visible = false
+layout_mode = 2
+script = ExtResource("3_crea4")
+metadata/_tab_index = 2
+
+[node name="Settings Back" type="Button" parent="Stack/Settings" unique_id=1970965269]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 84.0
+offset_bottom = 36.0
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 16
+text = "Back
+"
+
+[node name="Center" type="CenterContainer" parent="Stack/Settings" unique_id=1303752077]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Stack/Settings/Center" unique_id=1344404225]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Stack/Settings/Center/VBoxContainer" unique_id=1020608179]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Stack/Settings/Center/VBoxContainer/HBoxContainer" unique_id=350786324]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Audio Volume:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Volume" type="HSlider" parent="Stack/Settings/Center/VBoxContainer/HBoxContainer" unique_id=1118242765]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.1
+value = 0.5
+tick_count = 11
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="Audio" type="AudioStreamPlayer" parent="." unique_id=1402225]
+unique_name_in_owner = true
+stream = ExtResource("3_u03px")
+
+[connection signal="pressed" from="Stack/Main Page/Contents/Button Center/Buttons/Play" to="." method="play"]
+[connection signal="pressed" from="Stack/Main Page/Contents/Button Center/Buttons/Credits" to="." method="credits"]
+[connection signal="pressed" from="Stack/Main Page/Contents/Button Center/Buttons/Settings" to="." method="settings"]
+[connection signal="pressed" from="Stack/Credits/Back" to="." method="back"]
+[connection signal="pressed" from="Stack/Settings/Settings Back" to="." method="back"]
+[connection signal="value_changed" from="Stack/Settings/Center/VBoxContainer/HBoxContainer/Volume" to="Stack/Settings" method="volume_updated"]

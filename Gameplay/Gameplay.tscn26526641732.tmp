@@ -1,0 +1,228 @@
+[gd_scene format=3 uid="uid://bw212mplrva7m"]
+
+[ext_resource type="Script" uid="uid://cqo3rpv2ckgvv" path="res://Gameplay/Player/Code/Code.gd" id="1_hs5x1"]
+[ext_resource type="Script" uid="uid://dbbco222nt3v3" path="res://Gameplay/Ball/Code/Ball.gd" id="2_jrg7p"]
+[ext_resource type="Theme" uid="uid://huu2vw7u644u" path="res://UI/Themes/Theme.tres" id="3_5vg7g"]
+[ext_resource type="AudioStream" uid="uid://bgd3vhvlbixpj" path="res://Sound/Wall Hit.mp3" id="3_7uq6k"]
+[ext_resource type="AudioStream" uid="uid://cyqv3li25tn86" path="res://Sound/Death.mp3" id="3_8txw0"]
+[ext_resource type="Script" uid="uid://bqaeekrdgug5h" path="res://Gameplay/Death/Code/Death.gd" id="6_8uvy0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5jg4h"]
+size = Vector2(32, 224)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vg7g"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_it6un"]
+size = Vector2(1280, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d8717"]
+size = Vector2(32, 736)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qo4wk"]
+size = Vector2(32, 800)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vg7g"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="Gameplay" type="Node2D" unique_id=2103011122]
+
+[node name="Background" type="ColorRect" parent="." unique_id=1259270825]
+offset_right = 1280.0
+offset_bottom = 800.0
+color = Color(0.05882353, 0.05882353, 0.05882353, 1)
+
+[node name="Player" type="StaticBody2D" parent="." unique_id=1523874638]
+unique_name_in_owner = true
+position = Vector2(80, 400)
+script = ExtResource("1_hs5x1")
+
+[node name="Rays" type="Node2D" parent="Player" unique_id=1757397706]
+
+[node name="Top" type="RayCast2D" parent="Player/Rays" unique_id=1971457055]
+position = Vector2(0, -108)
+target_position = Vector2(0, -5)
+
+[node name="Bottom" type="RayCast2D" parent="Player/Rays" unique_id=1285826785]
+position = Vector2(0, 108)
+target_position = Vector2(0, 5)
+
+[node name="Collision" type="CollisionShape2D" parent="Player" unique_id=507011973]
+shape = SubResource("RectangleShape2D_5jg4h")
+
+[node name="Color" type="ColorRect" parent="Player" unique_id=247071193]
+offset_left = -16.0
+offset_top = -112.0
+offset_right = 16.0
+offset_bottom = 112.0
+color = Color(0.93649185, 0.5630322, 0.22139892, 1)
+
+[node name="Ball" type="CharacterBody2D" parent="." unique_id=1838758793]
+unique_name_in_owner = true
+position = Vector2(640, 400)
+script = ExtResource("2_jrg7p")
+
+[node name="Collision" type="CollisionShape2D" parent="Ball" unique_id=1733415265]
+shape = SubResource("RectangleShape2D_5vg7g")
+
+[node name="Color" type="ColorRect" parent="Ball" unique_id=1732379103]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Ball" unique_id=489442687]
+stream = ExtResource("3_7uq6k")
+volume_db = -4.0
+
+[node name="Bounce Collision" type="StaticBody2D" parent="." unique_id=1981675995]
+
+[node name="Top Wall" type="CollisionShape2D" parent="Bounce Collision" unique_id=907849166]
+position = Vector2(640, 16)
+shape = SubResource("RectangleShape2D_it6un")
+
+[node name="ColorRect" type="ColorRect" parent="Bounce Collision/Top Wall" unique_id=1830374158]
+offset_left = -640.0
+offset_top = -16.0
+offset_right = 640.0
+offset_bottom = 16.0
+color = Color(0.4506483, 0.4506483, 0.45064825, 1)
+
+[node name="Bottom Wall" type="CollisionShape2D" parent="Bounce Collision" unique_id=1825619512]
+position = Vector2(640, 784)
+shape = SubResource("RectangleShape2D_it6un")
+
+[node name="ColorRect" type="ColorRect" parent="Bounce Collision/Bottom Wall" unique_id=1148260908]
+offset_left = -640.0
+offset_top = -16.0
+offset_right = 640.0
+offset_bottom = 16.0
+color = Color(0.4509804, 0.4509804, 0.4509804, 1)
+
+[node name="Back Wall" type="CollisionShape2D" parent="Bounce Collision" unique_id=702565471]
+position = Vector2(1264, 400)
+shape = SubResource("RectangleShape2D_d8717")
+
+[node name="ColorRect" type="ColorRect" parent="Bounce Collision/Back Wall" unique_id=244207519]
+offset_left = -16.0
+offset_top = -368.0
+offset_right = 16.0
+offset_bottom = 368.0
+color = Color(0.4509804, 0.4509804, 0.4509804, 1)
+
+[node name="Death Area" type="Area2D" parent="." unique_id=694288146]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Death Area" unique_id=326507952]
+position = Vector2(-16, 400)
+shape = SubResource("RectangleShape2D_qo4wk")
+debug_color = Color(1, 0, 0.13333334, 0.41960785)
+
+[node name="Sound" type="AudioStreamPlayer" parent="Death Area" unique_id=1469621587]
+stream = ExtResource("3_8txw0")
+
+[node name="UI Layer" type="CanvasLayer" parent="." unique_id=2102853434]
+layer = 5
+
+[node name="TabContainer" type="TabContainer" parent="UI Layer" unique_id=344296387]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_5vg7g")
+theme_override_styles/panel = SubResource("StyleBoxFlat_5vg7g")
+current_tab = 1
+tabs_visible = false
+
+[node name="UI" type="Control" parent="UI Layer/TabContainer" unique_id=703003100]
+visible = false
+layout_mode = 2
+metadata/_edit_lock_ = true
+metadata/_tab_index = 0
+
+[node name="Score" type="Label" parent="UI Layer/TabContainer/UI" unique_id=964704900]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -168.0
+offset_top = 44.0
+offset_right = -44.0
+offset_bottom = 68.0
+grow_horizontal = 0
+text = "Score: 0"
+
+[node name="Background Panel" type="ColorRect" parent="UI Layer/TabContainer/UI/Score" unique_id=1256088092]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.24840015, 0.24840018, 0.24840012, 1)
+
+[node name="Death" type="Control" parent="UI Layer/TabContainer" unique_id=1975661351]
+layout_mode = 2
+script = ExtResource("6_8uvy0")
+metadata/_tab_index = 1
+
+[node name="ColorRect" type="ColorRect" parent="UI Layer/TabContainer/Death" unique_id=1751267063]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1148968, 0.11489681, 0.1148968, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI Layer/TabContainer/Death" unique_id=2059324844]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = -64.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI Layer/TabContainer/Death/VBoxContainer" unique_id=1009260515]
+custom_minimum_size = Vector2(1152, 112)
+layout_mode = 2
+theme = ExtResource("3_5vg7g")
+theme_override_font_sizes/font_size = 80
+text = "You Lost!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="UI Layer/TabContainer/Death/VBoxContainer" unique_id=365000508]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI Layer/TabContainer/Death/VBoxContainer/CenterContainer" unique_id=174159624]
+custom_minimum_size = Vector2(256, 96)
+layout_mode = 2
+
+[node name="Restart" type="Button" parent="UI Layer/TabContainer/Death/VBoxContainer/CenterContainer/VBoxContainer" unique_id=21701005]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Restart"
+
+[node name="Menu" type="Button" parent="UI Layer/TabContainer/Death/VBoxContainer/CenterContainer/VBoxContainer" unique_id=806730665]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Main Menu"
+
+[connection signal="body_entered" from="Death Area" to="Ball" method="death"]
+[connection signal="pressed" from="UI Layer/TabContainer/Death/VBoxContainer/CenterContainer/VBoxContainer/Restart" to="UI Layer/TabContainer/Death" method="restart"]
+[connection signal="pressed" from="UI Layer/TabContainer/Death/VBoxContainer/CenterContainer/VBoxContainer/Menu" to="UI Layer/TabContainer/Death" method="menu"]
