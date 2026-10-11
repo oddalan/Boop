@@ -13,7 +13,7 @@ config_version=5
 config/name="Boop"
 run/main_scene="uid://d2frtx7nc7s0w"
 config/features=PackedStringArray("4.7", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://cvsetqil4xham"
 
 [autoload]
 
